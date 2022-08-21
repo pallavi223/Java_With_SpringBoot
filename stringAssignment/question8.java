@@ -10,7 +10,7 @@ public class question8 {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter a string:");
 		String str = sc.nextLine();
-		char[] chrArray = str.toCharArray();
+		
 		int specCount = 0;
 		int upperCount=0;
 		int lowerCount = 0;
