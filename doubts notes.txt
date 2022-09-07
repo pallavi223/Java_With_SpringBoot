@@ -1,0 +1,302 @@
+Can you explain static block or keyword?
+  static keyword => It is an access modifier applicable at
+						a. variable level
+						b. method level
+						c. block level
+
+  variable level => If the value of instance variable,does not changes from Object to Object
+					then make such variables as static.
+
+  method level   => If u make method as static, u can call the method in 2 ways
+						a. using ClassName		
+						b. using Object
+
+  block level   => if we write static block, then this block gets executed at the time of
+				   loading .class file.
+
+
+eg:
+class Demo{
+	static{
+		System.out.println("Loading .class file");
+    }
+	public static void main(String[] args){
+			System.out.pritnln("Hey i m inside main()");
+	}
+}
+
+javac Demo.java
+java Demo
+		|
+		|
+		|=> Demo.main(new String[]{})
+	output: Loading .class file
+
+
+
+class Institute{
+	static String name="Ineuron";
+}
+
+public class Demo{
+	public static voaid main(String[] args){
+			Institute i1= new Institute();
+			Institute i2= new Institute();
+			Institute i3= new Institute();
+	}
+}
+
+what do you mean with 100% abstration when using interfaces but 0-100% abstraction when using abstract classes??
+can you explain it  with an example?
+
+ abstract class Person{ // abstract class is not  100% abstract
+	String name;
+	Integer id;
+	String gender;
+
+	//abstract method
+	public abstract void getPersondDetails();
+
+	//instance method/concrete method
+	public void displayDetails(){
+		System.out.println(name+""+id+""+gender);
+	}
+ }
+				VS
+
+interface Remote{  //interface is 100% abstract(Customer Requirement Specification)
+	int minVolume  = 0;
+	int maxVolume = 100;
+
+	public void increaseVolume();
+	public void decreaseVolume();
+}
+
+
+Can you explain loose coupling and tight coupling in inheritance. this terminalogy also introduced in the 
+dependency injection too, but want to know this in inheritance. could you explain?
+
+if we cannot able to create object of abstract class then what is the use of creating constructor?
+
+public class Object{
+	public Object(){
+
+	}
+}
+abstract class Person extends Object{
+	String name;
+	int age;
+	String gender;
+
+	public Person(String name,int age,String gender){
+
+		super();
+
+		this.name=name;
+		this.age=age;
+		this.gender=gender;
+	}
+
+	public void displayPersonDetails(){
+		System.out.println(name+" " + age + "" +gender);
+	}
+}
+
+class Student extends Person{
+	 String id;
+	 String address;
+
+	 public Student(String name,int age,String gender,String id,String address){
+			
+			super(name,age,gender);
+			
+			this.id=id;
+			this.address=address;
+	 }
+	 
+	 public void displayStudentDetails(){
+		System.out.println(id+""+address);
+	 }
+
+}
+
+class MainApp{
+	public static void main(String[] args){
+			Student student=new Student("sachin",49,"Male",10,"MI");//tight coupling
+
+			Person person = new Student();//loose coupling
+	}
+}
+
+
+Show the proof of abstract methods at the child class level?
+   abstract class A{
+		public void m1();
+		public void m2();
+   }
+   abstract class B extends A{
+		public void m1(){}
+   }
+   class C extends B{
+	    public void m2(){}
+   }
+
+Encapuslation
+============
+ Writing an associated datamembers and its associated functionalities in a single module is called
+ as Encapsulation.
+
+eg:: public class BankAccount{
+		private int balance;
+
+		public void setBalance(int balance){
+			//authentication will happen
+			this.balance=balance
+		}
+		public int getBalance(){
+			//authentication will happen
+			return balance;
+		}
+     }
+
+Object creation points
+======================
+  a. Classname refer=new ClassName();
+		  new => operator which trigger jvm to allocate memory for Object
+		  constructor => it will be called to initialize the instance variable fo the class.
+
+
+What does an empty block do like?
+public class Person{
+
+	//static variable(memory gets allocated at the time of loading .class file)
+	static int count;
+	
+	//instance block(gets executed during creation of Object)
+	{
+		count+=1;
+	}
+}
+
+Sir can you please explain the context of arrays in many to many association? Why didn't we use array for students in your example sir?
+    Student(M) <----------------- Course(M)
+		course[]
+        Nitin
+			Java,BlockChain,Python
+
+sir you told always doing the loose coupling .sir what is its benefitsof loose coupling and 
+disadvantages of doing tight coupling in inheritance only please explain sir
+    interface List{
+			public void m1();
+			public void m2();
+			public void m3();
+	}
+	class ArrayList implements List{
+		 //overriden methods
+		 public void m1(){}
+	     public void m2(){}
+		 public void m3(){}
+
+		 //specialized methods
+		 public void m4(){}
+		 public void m5(){}	
+	}
+	class LinkedList implements List{
+
+		//overriden methods
+		 public void m1(){}
+	     public void m2(){}
+		 public void m3(){}
+
+		 //specialized methods
+		 public void m5(){}
+		 public void m6(){}	
+
+	}
+			 new ArrayList();
+             new LinkedList();
+	List l =At the runtime one of the implementation class object will be created;//loose coupling
+		l.m1();
+		l.m2();
+		l.m3();
+
+		l.m4();//never call
+		l.m5();//never call
+
+    ArrayList al=new ArrayList();//tight coupling
+		al.m1(); 
+		al.m2(); 
+		al.m3();
+		al.m4();
+		al.m5();
+	
+   LinkedList ll=new LinkedList();//tight coupling
+		ll.m4();
+		ll.m5();
+
+
+//code to supply classname at runtime to create the object
+Object obj = Class.forName("className").newInstance();
+	ClasName c=(ClassName)obj;
+
+
+2. where should construction execution will done in stack or heap?		
+3. where should static block and static method execution will done in stack or heap?
+	Ans:execution => always happens in stack area
+		
+
+encapuslation = abstraction + polympophsim(live eg)
+
+static methods => overloading 
+					To get the desired output with change in the inputs
+
+
+eg: class Calculator{
+			public static int add(int a,int b){
+				return a+b;
+			}
+			public static int add(int a,int b,int c){
+				return a+b+c;
+			}
+			public static int add(int a,int b,int c,int d){
+				return a+b+c+d;
+			}
+	}
+
+	Calculator.add(10,20);
+	Calculator.add(10,20,30);
+	Calculator.add(10,20,30,40);
+
+
+what is the industry practice  Interface or Abstract class ..... or it depends on the project
+	ans. both in realtime as per architectural specification(wait till JEE coding)
+
+
+sir when is the runtime stack initialised, what I mean is , when in static block if we 
+	call some methods like println() etc ?
+
+System => It is a class present in java.lang package
+ out   => It is a static reference varaiable holding the object of PrintStream class(java.io)
+ println => It is a method out PrintStream class
+
+System.out.prinltn()
+  |	    |    |=> println() method to be executed so runtime stack comes into pitcure
+  |	    |
+  |     |=> object is created and the .class file of PrintStream is there in methodArea
+  |
+  |=> class will be loaded in method area.
+
+
+
+
+
+			
+					
+
+
+
+
+
+
+
+
